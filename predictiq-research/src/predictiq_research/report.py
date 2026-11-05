@@ -72,4 +72,52 @@ def build_report(results_dir: str | Path) -> str:
                                f"{m['rmse_source_test']:.2f} | {m['rmse_target_test']:.2f} | "
                                f"{setting} | {s['coverage']:.3f} [{ci[0]:.2f}, {ci[1]:.2f}] | "
                                f"{s['width']:.1f} |")
+    out += _summary(runs, shifts)
     return "\n".join(out) + "\n"
+
+
+def _summary(runs: dict, shifts: list) -> list[str]:
+    """Aggregates over the neural architectures (mean of per-architecture values)."""
+    out: list[str] = []
+    if runs:
+        out += ["", "## Summary: in-distribution coverage (neural models, nominal 0.90)", "",
+                "Mean coverage over LSTM/GRU/TCN/Transformer per subset and calibration "
+                "protocol (each model has n = number of test engines).", "",
+                "| subset | cal=trunc | cal=all | min over models (trunc) | "
+                "max over models (trunc) |",
+                "|---|---|---|---|---|"]
+        for subset, r in runs.items():
+            neural = {k: v for k, v in r["models"].items() if v["n_members"] > 1}
+            tr = [_best_interval(v["intervals"]["test_last|cal=trunc"])[1]["coverage"]
+                  for v in neural.values()]
+            al = [_best_interval(v["intervals"]["test_last|cal=all"])[1]["coverage"]
+                  for v in neural.values()]
+            out.append(f"| {subset} | {sum(tr) / len(tr):.3f} | {sum(al) / len(al):.3f} | "
+                       f"{min(tr):.3f} | {max(tr):.3f} |")
+    if shifts:
+        out += ["", "## Summary: shift (neural models, mean over architectures)", "",
+                "| source → target | RMSE source | RMSE target | coverage in-domain | "
+                "coverage shifted (source cal.) | coverage shifted (target recal.) | "
+                "width in-domain | width shifted (source cal.) | width recal. |",
+                "|---|---|---|---|---|---|---|---|---|"]
+        for sh in shifts:
+            ms = list(sh["models"].values())
+
+            def mean(f, ms=ms):
+                return sum(f(m) for m in ms) / len(ms)
+
+            def cov(m, key):
+                k = next(k for k in m["intervals"] if k.startswith(key))
+                return _best_interval(m["intervals"][k])[1]
+
+            out.append(
+                f"| {sh['source']} → {sh['target']} | "
+                f"{mean(lambda m: m['rmse_source_test']):.2f} | "
+                f"{mean(lambda m: m['rmse_target_test']):.2f} | "
+                f"{mean(lambda m: cov(m, 'in_domain')['coverage']):.3f} | "
+                f"{mean(lambda m: cov(m, 'shifted, source')['coverage']):.3f} | "
+                f"{mean(lambda m: cov(m, 'shifted, target')['coverage']):.3f} | "
+                f"{mean(lambda m: cov(m, 'in_domain')['width']):.1f} | "
+                f"{mean(lambda m: cov(m, 'shifted, source')['width']):.1f} | "
+                f"{mean(lambda m: cov(m, 'shifted, target')['width']):.1f} |")
+    return out

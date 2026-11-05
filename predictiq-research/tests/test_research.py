@@ -166,6 +166,13 @@ def test_run_subset_and_shift_end_to_end(tmp_path):
     assert "normalized" not in res["models"]["ridge"]["intervals"]["test_last|cal=trunc"]
 
     sh = run_shift(raw, "FD001", "FD003", ["gru"], [0, 1, 2], cfg, tmp_path / "out" / "models",
-                   0.1, window=10, trunc_per_unit=5, recal_engines=10)
+                   0.1, window=10, trunc_per_unit=5, recal_engines=10,
+                   out_path=tmp_path / "out" / "shift_FD001_to_FD003.json")
     keys = set(sh["models"]["gru"]["intervals"])
     assert any("source calibration" in k for k in keys) and any("recalibration" in k for k in keys)
+    from predictiq_research.report import build_report
+
+    text = build_report(tmp_path / "out")
+    assert "## Point accuracy" in text and "| FD001 | gru |" in text
+    assert "Summary: in-distribution coverage" in text and "| FD001 |" in text
+    assert "Summary: shift" in text and "FD001 → FD003" in text

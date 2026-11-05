@@ -42,9 +42,78 @@ publication direction.
 | Item | State |
 |---|---|
 | Data pipeline, models, conformal methods, harness, report generator, service | implemented; unit tests pass |
-| Experiments on the real C-MAPSS data | see `predictiq-research/results/REPORT.md` for what has actually been run; anything missing there has not been run |
+| Experiments on the real C-MAPSS data | run: FD001–FD004 in-distribution (5 seeds for FD001/FD003, 3 for FD002/FD004) and five shift pairs; see Results above |
+| GPU / CUDA / mixed-precision code paths | written, **never executed** (the development container has no GPU); CPU paths are what the tests cover |
 | Docker image | Dockerfile written, never built |
 | Experiment-tracking server (MLflow) | not integrated |
+
+## Results (real C-MAPSS data, CPU)
+
+Complete tables: [`predictiq-research/results/REPORT.md`](predictiq-research/results/REPORT.md),
+generated from the JSON files next to it. Setup: window 30, RUL capped at 125, target
+coverage 90%. FD001/FD003 use 5 seeds; FD002/FD004 (3.5–4x larger) use 3 seeds to bound CPU
+time. "Ensemble" = mean over seeds; classical baselines are single models, so compare them
+with the *single-seed* column when judging architectures.
+
+**Point accuracy (RMSE in cycles on the official test engines, capped RUL):**
+
+| subset | Ridge | HGB | LSTM | GRU | TCN | Transformer |
+|---|---|---|---|---|---|---|
+| FD001 (100 engines) | 16.12 | 14.28 | **13.43** | 13.82 | 14.68 | 13.48 |
+| FD002 (259 engines) | 16.40 | 13.57 | 14.13 | 13.52 | 14.12 | **13.08** |
+| FD003 (100 engines) | 16.87 | 14.14 | 14.91 | **13.66** | 15.92 | 13.96 |
+| FD004 (248 engines) | 19.62 | 15.80 | **14.67** | 14.77 | 16.86 | 14.71 |
+
+Neural entries are seed ensembles. Single-seed RMSE is higher (for example FD001 LSTM
+13.99 ± 0.42, Transformer 14.30 ± 0.37) and close to gradient boosting (14.28). The gap
+between the best neural model and gradient boosting is 0.5–1.1 cycles, and the best
+architecture changes with the subset; TCN is the weakest neural model in three of four
+subsets (on FD002 it ties with LSTM).
+
+**Interval validity (nominal 0.90, mean over the four neural models, normalized conformal):**
+
+| subset | coverage, calibration on random cut-offs | coverage, calibration on every cycle |
+|---|---|---|
+| FD001 | 0.890 | 0.907 |
+| FD002 | 0.890 | 0.899 |
+| FD003 | 0.885 | 0.853 |
+| FD004 | 0.857 | 0.874 |
+
+In distribution, coverage is close to nominal but slightly low on average, and the
+calibration protocol moves it by up to about 3 points. With 100–259 test engines each
+coverage estimate has a 95% interval of roughly ±4–6 points (printed per model in the
+report); for 13 of the 16 neural models that interval contains 0.90, and the three that fall
+slightly short are FD002 GRU (borderline) and FD004 TCN and Transformer.
+
+**Distribution shift (models trained on the source, tested on the target; mean over the four
+neural models):**
+
+| source → target | RMSE src → tgt | coverage in-domain | coverage shifted, source calibration | coverage shifted, recalibrated on 25 target engines | mean width in-domain → shifted → recalibrated |
+|---|---|---|---|---|---|
+| FD001 → FD002 | 13.85 → 20.39 | 0.890 | 0.858 | 0.883 | 44 → 56 → 58 |
+| FD001 → FD003 | 13.85 → 23.14 | 0.890 | 0.828 | 0.853 | 44 → 55 → 61 |
+| FD001 → FD004 | 13.85 → 24.76 | 0.890 | 0.821 | 0.890 | 44 → 56 → 67 |
+| FD002 → FD004 | 13.71 → 24.33 | 0.890 | 0.832 | 0.914 | 47 → 57 → 70 |
+| FD003 → FD004 | 14.61 → 22.20 | 0.885 | 0.883 | 0.935 | 43 → 56 → 69 |
+
+What this supports:
+
+- Under shift the point error grows by 47–79% in every pair.
+- Coverage with the source calibration is 3–7 points below the in-domain coverage in four of
+  five pairs (no drop for FD003 → FD004). In those four pairs, 3 of the 4 models have a 95%
+  coverage interval lying entirely below 0.90 (0 of 4 for FD003 → FD004).
+- The drop is smaller than the error increase would suggest because the normalized intervals
+  widen automatically (about 44 → 56) as the ensemble members disagree more under shift.
+  Ensemble disagreement is therefore a useful shift signal in itself.
+- Recalibrating on 25 labelled target engines restores coverage to 0.85–0.94, at the price of
+  intervals about 32–63% wider than in distribution.
+
+What it does not support: claims about real fleets (the data is simulated), about un-capped
+RUL, or significance after correcting for the many model/pair comparisons made.
+
+**Deployment check:** a bundle exported from the FD001 LSTM ensemble and served through the
+FastAPI app reproduces the research numbers on the 100 real test engines (RMSE 13.43,
+coverage 0.87).
 
 ## Quick start
 

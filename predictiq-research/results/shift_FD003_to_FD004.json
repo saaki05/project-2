@@ -1,0 +1,452 @@
+{
+  "source": "FD003",
+  "target": "FD004",
+  "alpha": 0.1,
+  "recal_engines": 25,
+  "models": {
+    "lstm": {
+      "rmse_source_test": 14.906316757202148,
+      "rmse_target_test": 22.2941837310791,
+      "intervals": {
+        "in_domain (src cal -> src test)": {
+          "split": {
+            "coverage": 0.84,
+            "coverage_ci95": [
+              0.7557955544110557,
+              0.8990479765052628
+            ],
+            "width": 35.5526008605957,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          },
+          "binned": {
+            "coverage": 0.88,
+            "coverage_ci95": [
+              0.8018773199709163,
+              0.9300066263473222
+            ],
+            "width": 38.610498223304745,
+            "n": 100,
+            "coverage_critical": 0.95,
+            "n_critical": 20
+          },
+          "normalized": {
+            "coverage": 0.87,
+            "coverage_ci95": [
+              0.7901947810519012,
+              0.9224290614158575
+            ],
+            "width": 37.00643539428711,
+            "n": 100,
+            "coverage_critical": 0.95,
+            "n_critical": 20
+          }
+        },
+        "shifted, source calibration (src cal -> tgt test)": {
+          "split": {
+            "coverage": 0.7540322580645161,
+            "coverage_ci95": [
+              0.6968267179132142,
+              0.803487765476345
+            ],
+            "width": 35.38232421875,
+            "n": 248,
+            "coverage_critical": 0.7547169811320755,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.7782258064516129,
+            "coverage_ci95": [
+              0.7224966779622736,
+              0.8254668038453389
+            ],
+            "width": 38.584328778328434,
+            "n": 248,
+            "coverage_critical": 0.7547169811320755,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.875,
+            "coverage_ci95": [
+              0.8280349656326145,
+              0.910524509847211
+            ],
+            "width": 49.23456573486328,
+            "n": 248,
+            "coverage_critical": 0.9622641509433962,
+            "n_critical": 53
+          }
+        },
+        "shifted, target recalibration (tgt cal -> tgt test)": {
+          "split": {
+            "coverage": 0.9516129032258065,
+            "coverage_ci95": [
+              0.9173407584232144,
+              0.9721072120471131
+            ],
+            "width": 69.98738098144531,
+            "n": 248,
+            "coverage_critical": 0.9056603773584906,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.9516129032258065,
+            "coverage_ci95": [
+              0.9173407584232144,
+              0.9721072120471131
+            ],
+            "width": 68.58053336220402,
+            "n": 248,
+            "coverage_critical": 0.9245283018867925,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.9475806451612904,
+            "coverage_ci95": [
+              0.9123929600266771,
+              0.9691135107073081
+            ],
+            "width": 68.29400634765625,
+            "n": 248,
+            "coverage_critical": 0.9811320754716981,
+            "n_critical": 53
+          }
+        }
+      }
+    },
+    "gru": {
+      "rmse_source_test": 13.659643173217773,
+      "rmse_target_test": 22.97175407409668,
+      "intervals": {
+        "in_domain (src cal -> src test)": {
+          "split": {
+            "coverage": 0.82,
+            "coverage_ci95": [
+              0.7333246397578691,
+              0.8829986834574896
+            ],
+            "width": 32.61647033691406,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          },
+          "binned": {
+            "coverage": 0.96,
+            "coverage_ci95": [
+              0.9016278276739262,
+              0.984336949448152
+            ],
+            "width": 40.25195482492447,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          },
+          "normalized": {
+            "coverage": 0.86,
+            "coverage_ci95": [
+              0.7786263961619276,
+              0.914737342455351
+            ],
+            "width": 42.35573196411133,
+            "n": 100,
+            "coverage_critical": 0.95,
+            "n_critical": 20
+          }
+        },
+        "shifted, source calibration (src cal -> tgt test)": {
+          "split": {
+            "coverage": 0.7419354838709677,
+            "coverage_ci95": [
+              0.6840761173715765,
+              0.7924138668089561
+            ],
+            "width": 32.85246276855469,
+            "n": 248,
+            "coverage_critical": 0.7169811320754716,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.8145161290322581,
+            "coverage_ci95": [
+              0.7614733804256424,
+              0.85796359900905
+            ],
+            "width": 40.556688471787396,
+            "n": 248,
+            "coverage_critical": 0.660377358490566,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.8830645161290323,
+            "coverage_ci95": [
+              0.8371051637766482,
+              0.9173373111758616
+            ],
+            "width": 57.01288986206055,
+            "n": 248,
+            "coverage_critical": 0.7924528301886793,
+            "n_critical": 53
+          }
+        },
+        "shifted, target recalibration (tgt cal -> tgt test)": {
+          "split": {
+            "coverage": 0.9395161290322581,
+            "coverage_ci95": [
+              0.9026162387993177,
+              0.9630072324619832
+            ],
+            "width": 67.49347686767578,
+            "n": 248,
+            "coverage_critical": 0.8679245283018868,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.9314516129032258,
+            "coverage_ci95": [
+              0.8929754562101135,
+              0.9567650155785028
+            ],
+            "width": 67.7626045842565,
+            "n": 248,
+            "coverage_critical": 0.8679245283018868,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.9516129032258065,
+            "coverage_ci95": [
+              0.9173407584232144,
+              0.9721072120471131
+            ],
+            "width": 74.1620864868164,
+            "n": 248,
+            "coverage_critical": 0.9433962264150944,
+            "n_critical": 53
+          }
+        }
+      }
+    },
+    "tcn": {
+      "rmse_source_test": 15.91591739654541,
+      "rmse_target_test": 23.31986427307129,
+      "intervals": {
+        "in_domain (src cal -> src test)": {
+          "split": {
+            "coverage": 0.91,
+            "coverage_ci95": [
+              0.8377362530335634,
+              0.9519280048361151
+            ],
+            "width": 48.4356575012207,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          },
+          "binned": {
+            "coverage": 0.94,
+            "coverage_ci95": [
+              0.8752303146877748,
+              0.9722142547333433
+            ],
+            "width": 46.05743906021118,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          },
+          "normalized": {
+            "coverage": 0.95,
+            "coverage_ci95": [
+              0.8882480347279118,
+              0.9784566385436864
+            ],
+            "width": 51.2447395324707,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          }
+        },
+        "shifted, source calibration (src cal -> tgt test)": {
+          "split": {
+            "coverage": 0.8266129032258065,
+            "coverage_ci95": [
+              0.7746084986952967,
+              0.8686529799484223
+            ],
+            "width": 48.2794189453125,
+            "n": 248,
+            "coverage_critical": 0.7169811320754716,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.8346774193548387,
+            "coverage_ci95": [
+              0.7834096733557514,
+              0.8757348047606521
+            ],
+            "width": 49.55977572837183,
+            "n": 248,
+            "coverage_critical": 0.6226415094339622,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.875,
+            "coverage_ci95": [
+              0.8280349656326145,
+              0.910524509847211
+            ],
+            "width": 59.95024871826172,
+            "n": 248,
+            "coverage_critical": 0.8301886792452831,
+            "n_critical": 53
+          }
+        },
+        "shifted, target recalibration (tgt cal -> tgt test)": {
+          "split": {
+            "coverage": 0.9153225806451613,
+            "coverage_ci95": [
+              0.8740239235404448,
+              0.9439505493028026
+            ],
+            "width": 63.576236724853516,
+            "n": 248,
+            "coverage_critical": 0.7735849056603774,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.9233870967741935,
+            "coverage_ci95": [
+              0.8834499063693462,
+              0.9504075659465858
+            ],
+            "width": 64.86033741024232,
+            "n": 248,
+            "coverage_critical": 0.8301886792452831,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.9112903225806451,
+            "coverage_ci95": [
+              0.8693443524927388,
+              0.9406886206141666
+            ],
+            "width": 67.10108947753906,
+            "n": 248,
+            "coverage_critical": 0.8679245283018868,
+            "n_critical": 53
+          }
+        }
+      }
+    },
+    "transformer": {
+      "rmse_source_test": 13.958318710327148,
+      "rmse_target_test": 20.205665588378906,
+      "intervals": {
+        "in_domain (src cal -> src test)": {
+          "split": {
+            "coverage": 0.89,
+            "coverage_ci95": [
+              0.8136853697209698,
+              0.9374586804477487
+            ],
+            "width": 37.04350280761719,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          },
+          "binned": {
+            "coverage": 0.92,
+            "coverage_ci95": [
+              0.8500173312059693,
+              0.9589070305141891
+            ],
+            "width": 37.425655908584595,
+            "n": 100,
+            "coverage_critical": 1.0,
+            "n_critical": 20
+          },
+          "normalized": {
+            "coverage": 0.86,
+            "coverage_ci95": [
+              0.7786263961619276,
+              0.914737342455351
+            ],
+            "width": 39.87605285644531,
+            "n": 100,
+            "coverage_critical": 0.95,
+            "n_critical": 20
+          }
+        },
+        "shifted, source calibration (src cal -> tgt test)": {
+          "split": {
+            "coverage": 0.7782258064516129,
+            "coverage_ci95": [
+              0.7224966779622736,
+              0.8254668038453389
+            ],
+            "width": 37.74803161621094,
+            "n": 248,
+            "coverage_critical": 0.6981132075471698,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.8024193548387096,
+            "coverage_ci95": [
+              0.748412983268715,
+              0.8471994969569507
+            ],
+            "width": 42.17035170956965,
+            "n": 248,
+            "coverage_critical": 0.5849056603773585,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.8991935483870968,
+            "coverage_ci95": [
+              0.8554243477910584,
+              0.9307841261068204
+            ],
+            "width": 56.23896026611328,
+            "n": 248,
+            "coverage_critical": 0.8301886792452831,
+            "n_critical": 53
+          }
+        },
+        "shifted, target recalibration (tgt cal -> tgt test)": {
+          "split": {
+            "coverage": 0.907258064516129,
+            "coverage_ci95": [
+              0.8646853106435144,
+              0.9374061627270487
+            ],
+            "width": 57.761863708496094,
+            "n": 248,
+            "coverage_critical": 0.8490566037735849,
+            "n_critical": 53
+          },
+          "binned": {
+            "coverage": 0.9233870967741935,
+            "coverage_ci95": [
+              0.8834499063693462,
+              0.9504075659465858
+            ],
+            "width": 58.06874503291422,
+            "n": 248,
+            "coverage_critical": 0.8490566037735849,
+            "n_critical": 53
+          },
+          "normalized": {
+            "coverage": 0.9314516129032258,
+            "coverage_ci95": [
+              0.8929754562101135,
+              0.9567650155785028
+            ],
+            "width": 68.02662658691406,
+            "n": 248,
+            "coverage_critical": 0.9056603773584906,
+            "n_critical": 53
+          }
+        }
+      }
+    }
+  }
+}

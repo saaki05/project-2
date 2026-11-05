@@ -1,0 +1,738 @@
+{
+  "subset": "FD002",
+  "alpha": 0.1,
+  "cap": 125.0,
+  "window": 30,
+  "config": {
+    "hidden": 64,
+    "dropout": 0.1,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 40,
+    "patience": 6,
+    "batch_size": 256,
+    "cap": 125.0
+  },
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "device": "cpu",
+  "n_train_engines": 182,
+  "n_val_engines": 39,
+  "n_cal_engines": 39,
+  "n_test_engines": 259,
+  "models": {
+    "ridge": {
+      "n_members": 1,
+      "ensemble": {
+        "rmse": 16.398855209350586,
+        "mae": 13.052083015441895,
+        "nasa_score": 1262.817626953125
+      },
+      "ensemble_test_all": {
+        "rmse": 17.292238235473633,
+        "mae": 13.107331275939941,
+        "nasa_score": 155329.78125
+      },
+      "intervals": {
+        "test_last|cal=trunc": {
+          "split": {
+            "coverage": 0.9459459459459459,
+            "coverage_ci95": [
+              0.9113245645194882,
+              0.967531750462615
+            ],
+            "width": 53.16105270385742,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9305019305019305,
+            "coverage_ci95": [
+              0.892829044071897,
+              0.9555906885731636
+            ],
+            "width": 48.54095834562677,
+            "n": 259,
+            "coverage_critical": 0.9836065573770492,
+            "n_critical": 61
+          }
+        },
+        "test_last|cal=all": {
+          "split": {
+            "coverage": 0.9305019305019305,
+            "coverage_ci95": [
+              0.892829044071897,
+              0.9555906885731636
+            ],
+            "width": 50.39152145385742,
+            "n": 259,
+            "coverage_critical": 0.9836065573770492,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9073359073359073,
+            "coverage_ci95": [
+              0.8658255689182282,
+              0.9369392902212688
+            ],
+            "width": 47.5511880381227,
+            "n": 259,
+            "coverage_critical": 0.9836065573770492,
+            "n_critical": 61
+          }
+        },
+        "test_all|cal=all": {
+          "split": {
+            "coverage": 0.9054161395663558,
+            "coverage_ci95": [
+              0.9022591156501659,
+              0.9084815350725602
+            ],
+            "width": 46.16202163696289,
+            "n": 33991,
+            "coverage_critical": 0.9438822447102115,
+            "n_critical": 1087
+          },
+          "binned": {
+            "coverage": 0.9040334206113383,
+            "coverage_ci95": [
+              0.9008562946575034,
+              0.9071192306645501
+            ],
+            "width": 39.782502590654275,
+            "n": 33991,
+            "coverage_critical": 0.8380864765409384,
+            "n_critical": 1087
+          }
+        }
+      }
+    },
+    "hgb": {
+      "n_members": 1,
+      "ensemble": {
+        "rmse": 13.565665777941875,
+        "mae": 9.900973860150549,
+        "nasa_score": 773.8479863215141
+      },
+      "ensemble_test_all": {
+        "rmse": 15.211718134735726,
+        "mae": 10.961975393525448,
+        "nasa_score": 149328.71987726566
+      },
+      "intervals": {
+        "test_last|cal=trunc": {
+          "split": {
+            "coverage": 0.9613899613899614,
+            "coverage_ci95": [
+              0.930397786939795,
+              0.9788951103793506
+            ],
+            "width": 49.60622148226995,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9536679536679536,
+            "coverage_ci95": [
+              0.9207739531177606,
+              0.9733006530328638
+            ],
+            "width": 43.45503570328784,
+            "n": 259,
+            "coverage_critical": 0.9672131147540983,
+            "n_critical": 61
+          }
+        },
+        "test_last|cal=all": {
+          "split": {
+            "coverage": 0.9420849420849421,
+            "coverage_ci95": [
+              0.9066547731416146,
+              0.964592396256228
+            ],
+            "width": 46.105124134286164,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9613899613899614,
+            "coverage_ci95": [
+              0.930397786939795,
+              0.9788951103793506
+            ],
+            "width": 43.006279412351795,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          }
+        },
+        "test_all|cal=all": {
+          "split": {
+            "coverage": 0.9201847547880321,
+            "coverage_ci95": [
+              0.9172559682966072,
+              0.923018575003515
+            ],
+            "width": 41.54378163496957,
+            "n": 33991,
+            "coverage_critical": 0.9963201471941122,
+            "n_critical": 1087
+          },
+          "binned": {
+            "coverage": 0.9265393780706658,
+            "coverage_ci95": [
+              0.9237173816784474,
+              0.9292649719737018
+            ],
+            "width": 35.95475304910713,
+            "n": 33991,
+            "coverage_critical": 0.9365225390984361,
+            "n_critical": 1087
+          }
+        }
+      }
+    },
+    "lstm": {
+      "n_members": 3,
+      "single_member": {
+        "rmse": {
+          "mean": 14.50850772857666,
+          "std": 0.14935626398663407
+        },
+        "mae": {
+          "mean": 10.521177927652994,
+          "std": 0.04468720883515221
+        },
+        "nasa_score": {
+          "mean": 1114.6961263020833,
+          "std": 88.17933971950845
+        }
+      },
+      "ensemble": {
+        "rmse": 14.129725456237793,
+        "mae": 10.237580299377441,
+        "nasa_score": 1052.091796875
+      },
+      "ensemble_test_all": {
+        "rmse": 15.347758293151855,
+        "mae": 10.825135231018066,
+        "nasa_score": 163371.6875
+      },
+      "intervals": {
+        "test_last|cal=trunc": {
+          "split": {
+            "coverage": 0.9613899613899614,
+            "coverage_ci95": [
+              0.930397786939795,
+              0.9788951103793506
+            ],
+            "width": 50.36893081665039,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9227799227799228,
+            "coverage_ci95": [
+              0.8837426671528562,
+              0.9494587743236834
+            ],
+            "width": 43.15877331914128,
+            "n": 259,
+            "coverage_critical": 0.9344262295081968,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.8841698841698842,
+            "coverage_ci95": [
+              0.839460663895879,
+              0.9176493217380541
+            ],
+            "width": 47.064971923828125,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          }
+        },
+        "test_last|cal=all": {
+          "split": {
+            "coverage": 0.9266409266409267,
+            "coverage_ci95": [
+              0.8882740230702526,
+              0.9525365639905476
+            ],
+            "width": 45.77528762817383,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9343629343629344,
+            "coverage_ci95": [
+              0.8974094709452602,
+              0.958619407284061
+            ],
+            "width": 40.57594014686968,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.8841698841698842,
+            "coverage_ci95": [
+              0.839460663895879,
+              0.9176493217380541
+            ],
+            "width": 47.062252044677734,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          }
+        },
+        "test_all|cal=all": {
+          "split": {
+            "coverage": 0.9113588891177077,
+            "coverage_ci95": [
+              0.9082906203943751,
+              0.9143341863057096
+            ],
+            "width": 40.995758056640625,
+            "n": 33991,
+            "coverage_critical": 0.9981600735970562,
+            "n_critical": 1087
+          },
+          "binned": {
+            "coverage": 0.906210467476685,
+            "coverage_ci95": [
+              0.9030650829397808,
+              0.9092640440769486
+            ],
+            "width": 34.256215171216915,
+            "n": 33991,
+            "coverage_critical": 0.9503219871205152,
+            "n_critical": 1087
+          },
+          "normalized": {
+            "coverage": 0.9127416080727251,
+            "coverage_ci95": [
+              0.909694563207038,
+              0.9156953688937192
+            ],
+            "width": 42.3491096496582,
+            "n": 33991,
+            "coverage_critical": 0.9733210671573137,
+            "n_critical": 1087
+          }
+        }
+      }
+    },
+    "gru": {
+      "n_members": 3,
+      "single_member": {
+        "rmse": {
+          "mean": 13.847099939982096,
+          "std": 0.2103959957269798
+        },
+        "mae": {
+          "mean": 10.000147501627604,
+          "std": 0.20352963346027161
+        },
+        "nasa_score": {
+          "mean": 951.2084147135416,
+          "std": 114.2465699767768
+        }
+      },
+      "ensemble": {
+        "rmse": 13.515318870544434,
+        "mae": 9.80872917175293,
+        "nasa_score": 885.468505859375
+      },
+      "ensemble_test_all": {
+        "rmse": 14.924463272094727,
+        "mae": 10.403948783874512,
+        "nasa_score": 142349.0625
+      },
+      "intervals": {
+        "test_last|cal=trunc": {
+          "split": {
+            "coverage": 0.9575289575289575,
+            "coverage_ci95": [
+              0.9255615422223779,
+              0.9761222095125072
+            ],
+            "width": 48.21957778930664,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9305019305019305,
+            "coverage_ci95": [
+              0.892829044071897,
+              0.9555906885731636
+            ],
+            "width": 43.66330242801357,
+            "n": 259,
+            "coverage_critical": 0.9672131147540983,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.861003861003861,
+            "coverage_ci95": [
+              0.8135732603362104,
+              0.8978818517921588
+            ],
+            "width": 39.5821418762207,
+            "n": 259,
+            "coverage_critical": 0.9672131147540983,
+            "n_critical": 61
+          }
+        },
+        "test_last|cal=all": {
+          "split": {
+            "coverage": 0.9536679536679536,
+            "coverage_ci95": [
+              0.9207739531177606,
+              0.9733006530328638
+            ],
+            "width": 46.33338928222656,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9382239382239382,
+            "coverage_ci95": [
+              0.9020172878634467,
+              0.9616207359501352
+            ],
+            "width": 41.86974974948927,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.8918918918918919,
+            "coverage_ci95": [
+              0.8481896901779178,
+              0.9241385866245366
+            ],
+            "width": 43.548526763916016,
+            "n": 259,
+            "coverage_critical": 0.9672131147540983,
+            "n_critical": 61
+          }
+        },
+        "test_all|cal=all": {
+          "split": {
+            "coverage": 0.9215086346385808,
+            "coverage_ci95": [
+              0.9186016311171621,
+              0.9243203726729659
+            ],
+            "width": 41.55030822753906,
+            "n": 33991,
+            "coverage_critical": 1.0,
+            "n_critical": 1087
+          },
+          "binned": {
+            "coverage": 0.9258921479215086,
+            "coverage_ci95": [
+              0.9230590099908266,
+              0.9286290296439866
+            ],
+            "width": 34.800255863346194,
+            "n": 33991,
+            "coverage_critical": 0.9733210671573137,
+            "n_critical": 1087
+          },
+          "normalized": {
+            "coverage": 0.9127710276249595,
+            "coverage_ci95": [
+              0.909724436768568,
+              0.9157243277875227
+            ],
+            "width": 41.46839904785156,
+            "n": 33991,
+            "coverage_critical": 0.9751609935602575,
+            "n_critical": 1087
+          }
+        }
+      }
+    },
+    "tcn": {
+      "n_members": 3,
+      "single_member": {
+        "rmse": {
+          "mean": 14.606921831766764,
+          "std": 0.008433905589654098
+        },
+        "mae": {
+          "mean": 10.739468892415365,
+          "std": 0.08839423692655399
+        },
+        "nasa_score": {
+          "mean": 1120.7691040039062,
+          "std": 119.28579472259145
+        }
+      },
+      "ensemble": {
+        "rmse": 14.120121955871582,
+        "mae": 10.430000305175781,
+        "nasa_score": 1028.8331298828125
+      },
+      "ensemble_test_all": {
+        "rmse": 16.04298210144043,
+        "mae": 12.047428131103516,
+        "nasa_score": 165383.984375
+      },
+      "intervals": {
+        "test_last|cal=trunc": {
+          "split": {
+            "coverage": 0.9613899613899614,
+            "coverage_ci95": [
+              0.930397786939795,
+              0.9788951103793506
+            ],
+            "width": 51.602821350097656,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9420849420849421,
+            "coverage_ci95": [
+              0.9066547731416146,
+              0.964592396256228
+            ],
+            "width": 45.543660832648115,
+            "n": 259,
+            "coverage_critical": 0.9672131147540983,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.9034749034749034,
+            "coverage_ci95": [
+              0.8613925486769852,
+              0.9337631648782511
+            ],
+            "width": 55.47210693359375,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          }
+        },
+        "test_last|cal=all": {
+          "split": {
+            "coverage": 0.9575289575289575,
+            "coverage_ci95": [
+              0.9255615422223779,
+              0.9761222095125072
+            ],
+            "width": 48.792701721191406,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9420849420849421,
+            "coverage_ci95": [
+              0.9066547731416146,
+              0.964592396256228
+            ],
+            "width": 43.02321506421078,
+            "n": 259,
+            "coverage_critical": 0.9836065573770492,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.8957528957528957,
+            "coverage_ci95": [
+              0.8525753867680765,
+              0.9273620356186385
+            ],
+            "width": 52.625572204589844,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          }
+        },
+        "test_all|cal=all": {
+          "split": {
+            "coverage": 0.9276279015033391,
+            "coverage_ci95": [
+              0.9248247848568619,
+              0.9303343696426253
+            ],
+            "width": 44.81896209716797,
+            "n": 33991,
+            "coverage_critical": 0.985280588776449,
+            "n_critical": 1087
+          },
+          "binned": {
+            "coverage": 0.9268041540407755,
+            "coverage_ci95": [
+              0.9239867335674655,
+              0.929525112182685
+            ],
+            "width": 37.91685597751243,
+            "n": 33991,
+            "coverage_critical": 0.9705611775528978,
+            "n_critical": 1087
+          },
+          "normalized": {
+            "coverage": 0.9164484716542615,
+            "coverage_ci95": [
+              0.9134594534869557,
+              0.9193433679858175
+            ],
+            "width": 52.88636779785156,
+            "n": 33991,
+            "coverage_critical": 0.9760809567617296,
+            "n_critical": 1087
+          }
+        }
+      }
+    },
+    "transformer": {
+      "n_members": 3,
+      "single_member": {
+        "rmse": {
+          "mean": 13.74898878733317,
+          "std": 0.08860319721642389
+        },
+        "mae": {
+          "mean": 9.938575744628906,
+          "std": 0.1262109331502575
+        },
+        "nasa_score": {
+          "mean": 898.7903035481771,
+          "std": 81.89379315358424
+        }
+      },
+      "ensemble": {
+        "rmse": 13.080820083618164,
+        "mae": 9.415181159973145,
+        "nasa_score": 798.7891235351562
+      },
+      "ensemble_test_all": {
+        "rmse": 14.70948600769043,
+        "mae": 10.171162605285645,
+        "nasa_score": 136714.546875
+      },
+      "intervals": {
+        "test_last|cal=trunc": {
+          "split": {
+            "coverage": 0.9536679536679536,
+            "coverage_ci95": [
+              0.9207739531177606,
+              0.9733006530328638
+            ],
+            "width": 45.82465744018555,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9420849420849421,
+            "coverage_ci95": [
+              0.9066547731416146,
+              0.964592396256228
+            ],
+            "width": 42.168169868498694,
+            "n": 259,
+            "coverage_critical": 0.9836065573770492,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.9111969111969112,
+            "coverage_ci95": [
+              0.8702760475736321,
+              0.9400979571501255
+            ],
+            "width": 45.82682800292969,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          }
+        },
+        "test_last|cal=all": {
+          "split": {
+            "coverage": 0.9498069498069498,
+            "coverage_ci95": [
+              0.9160297444073385,
+              0.9704357161590252
+            ],
+            "width": 44.03923034667969,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "binned": {
+            "coverage": 0.9343629343629344,
+            "coverage_ci95": [
+              0.8974094709452602,
+              0.958619407284061
+            ],
+            "width": 39.70290603784981,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          },
+          "normalized": {
+            "coverage": 0.9227799227799228,
+            "coverage_ci95": [
+              0.8837426671528562,
+              0.9494587743236834
+            ],
+            "width": 49.77154541015625,
+            "n": 259,
+            "coverage_critical": 1.0,
+            "n_critical": 61
+          }
+        },
+        "test_all|cal=all": {
+          "split": {
+            "coverage": 0.9126239298637875,
+            "coverage_ci95": [
+              0.9095750699833263,
+              0.9155795322960971
+            ],
+            "width": 39.26609802246094,
+            "n": 33991,
+            "coverage_critical": 1.0,
+            "n_critical": 1087
+          },
+          "binned": {
+            "coverage": 0.9187431967285458,
+            "coverage_ci95": [
+              0.9157909568507614,
+              0.9216007961380213
+            ],
+            "width": 33.224390524953165,
+            "n": 33991,
+            "coverage_critical": 0.9742410303587856,
+            "n_critical": 1087
+          },
+          "normalized": {
+            "coverage": 0.9094466182224706,
+            "coverage_ci95": [
+              0.906349360889933,
+              0.9124513362134768
+            ],
+            "width": 42.25149154663086,
+            "n": 33991,
+            "coverage_critical": 0.9917203311867525,
+            "n_critical": 1087
+          }
+        }
+      }
+    }
+  }
+}
