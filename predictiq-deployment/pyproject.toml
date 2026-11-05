@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "predictiq-deployment"
+version = "0.1.0"
+description = "Serving layer for PredictIQ: RUL prediction with conformal intervals, alerts and drift checks."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "predictiq-research>=0.1,<0.2",
+    "predictiq-data-pipeline>=0.1,<0.2",
+    "torch>=2.1",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "fastapi>=0.110",
+    "uvicorn>=0.27",
+    "pydantic>=2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.4", "httpx>=0.27"]
+
+[project.scripts]
+predictiq-export = "predictiq_service.export:main"
+predictiq-serve = "predictiq_service.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
