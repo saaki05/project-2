@@ -19,6 +19,8 @@ predictiq-data-pipeline  ──▶  predictiq-research  ──▶  predictiq-dep
 | [`predictiq-research`](predictiq-research) | models, uncertainty methods (split / normalized / binned conformal written from scratch), experiment harness, report generator |
 | [`predictiq-deployment`](predictiq-deployment) | model bundle export, `/predict` with interval and alert level, `/drift`, Dockerfile |
 
+![PredictIQ architecture: data pipeline, research, deployment](docs/figures/architecture.png)
+
 ## Research question
 
 Point accuracy on C-MAPSS is saturated, but a maintenance planner needs to know *how sure*
@@ -64,6 +66,8 @@ with the *single-seed* column when judging architectures.
 | FD003 (100 engines) | 16.87 | 14.14 | 14.91 | **13.66** | 15.92 | 13.96 |
 | FD004 (248 engines) | 19.62 | 15.80 | **14.67** | 14.77 | 16.86 | 14.71 |
 
+![RMSE of every model on each C-MAPSS subset](docs/figures/accuracy.png)
+
 Neural entries are seed ensembles. Single-seed RMSE is higher (for example FD001 LSTM
 13.99 ± 0.42, Transformer 14.30 ± 0.37) and close to gradient boosting (14.28). The gap
 between the best neural model and gradient boosting is 0.5–1.1 cycles, and the best
@@ -78,6 +82,8 @@ subsets (on FD002 it ties with LSTM).
 | FD002 | 0.890 | 0.899 |
 | FD003 | 0.885 | 0.853 |
 | FD004 | 0.857 | 0.874 |
+
+![Empirical coverage of 90% intervals with Wilson intervals](docs/figures/coverage_in_distribution.png)
 
 In distribution, coverage is close to nominal but slightly low on average, and the
 calibration protocol moves it by up to about 3 points. With 100–259 test engines each
@@ -96,6 +102,8 @@ neural models):**
 | FD002 → FD004 | 13.71 → 24.33 | 0.890 | 0.832 | 0.914 | 47 → 57 → 70 |
 | FD003 → FD004 | 14.61 → 22.20 | 0.885 | 0.883 | 0.935 | 43 → 56 → 69 |
 
+![Coverage in distribution, under shift and after recalibration](docs/figures/shift_coverage.png)
+
 What this supports:
 
 - Under shift the point error grows by 47–79% in every pair.
@@ -111,9 +119,14 @@ What this supports:
 What it does not support: claims about real fleets (the data is simulated), about un-capped
 RUL, or significance after correcting for the many model/pair comparisons made.
 
+![Mean interval width in distribution, under shift and after recalibration](docs/figures/interval_width.png)
+
 **Deployment check:** a bundle exported from the FD001 LSTM ensemble and served through the
 FastAPI app reproduces the research numbers on the 100 real test engines (RMSE 13.43,
-coverage 0.87).
+coverage 0.87). The figure shows the service's prediction and interval at every cycle for
+three real test engines; the dashed line is the true (capped) RUL.
+
+![Per-cycle RUL prediction and 90% interval for three test engines](docs/figures/trajectories.png)
 
 ## Quick start
 
@@ -133,6 +146,15 @@ three packages (`.github/workflows/ci.yml`).
 C-MAPSS is distributed by the NASA Prognostics Center of Excellence; follow its terms of use.
 A. Saxena, K. Goebel, D. Simon, N. Eklund, "Damage Propagation Modeling for Aircraft Engine
 Run-to-Failure Simulation", PHM08. The data is not included here.
+
+## Regenerating the figures
+
+Every figure in `docs/figures/` is produced from the result files by a script (no number is
+typed by hand). `pip install matplotlib`, then:
+
+```bash
+python scripts/make_figures.py --raw /path/to/CMAPSSData --bundle fd001_bundle.pt   # bundle from predictiq-export
+```
 
 ## License
 
