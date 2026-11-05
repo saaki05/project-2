@@ -121,6 +121,25 @@ RUL, or significance after correcting for the many model/pair comparisons made.
 
 ![Mean interval width in distribution, under shift and after recalibration](docs/figures/interval_width.png)
 
+**Hyper-parameter check on FD001 (GRU, 3 seeds).** To see whether the default model is far from
+what tuning can reach, I varied width and window length and chose by *validation* RMSE
+([`results/tuning_fd001.json`](predictiq-research/results/tuning_fd001.json)):
+
+| configuration | validation RMSE | test RMSE (ensemble) | 90% coverage |
+|---|---|---|---|
+| hidden 64, window 30 (default) | 11.69 | 13.69 | 0.84 |
+| hidden 128, window 30 | 11.47 | 13.54 | 0.97 |
+| hidden 64, window 50 | 10.32 | **13.13** | 0.86 |
+| hidden 128, window 50 (chosen on validation) | **9.75** | 13.48 | 0.84 |
+
+![Validation and test RMSE for four GRU configurations](docs/figures/tuning_fd001.png)
+
+Validation RMSE improves steadily with a wider network and a longer window, but the test
+RMSE of the validation-chosen configuration improves only 0.21 cycles over the default, and a
+different configuration is best on test; with seed spreads of 0.1–0.3 these differences are
+within noise. The default configuration used throughout is therefore close to what simple
+tuning gives on this data; the conclusions about interval validity do not depend on it.
+
 **Deployment check:** a bundle exported from the FD001 LSTM ensemble and served through the
 FastAPI app reproduces the research numbers on the 100 real test engines (RMSE 13.43,
 coverage 0.87). The figure shows the service's prediction and interval at every cycle for

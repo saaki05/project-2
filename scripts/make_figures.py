@@ -184,6 +184,32 @@ def trajectories(raw, bundle_path):
     fs.save(fig, OUT / "trajectories.png")
 
 
+def tuning():
+    f = RES / "tuning_fd001.json"
+    if not f.exists():
+        return
+    d = json.load(open(f))
+    rows = list(d["results"].items())
+    fig, ax = plt.subplots(figsize=(8.2, 4.0))
+    for i, (name, r) in enumerate(rows):
+        sel = name == d["selected_by_validation"]
+        ax.scatter([r["val_rmse"]], [i], color=fs.GRAY, s=70, zorder=3,
+                   label="validation RMSE (used to choose)" if i == 0 else None)
+        ax.scatter([r["test_rmse"]], [i], color=fs.BLUE, s=70, zorder=3,
+                   edgecolor=fs.INK if sel else fs.SURFACE, linewidth=2 if sel else 1,
+                   label="test RMSE" if i == 0 else None)
+        ax.text(r["test_rmse"] + 0.2, i, f"{r['test_rmse']:.2f}" + ("  ← chosen on validation" if sel else ""),
+                va="center", fontsize=8.5, color=fs.INK2)
+    ax.set_yticks(range(len(rows)), [n for n, _ in rows])
+    ax.invert_yaxis()
+    ax.set_xlim(8.5, 17)
+    ax.set_xlabel("RMSE (cycles), GRU seed ensemble on FD001")
+    ax.set_title("Wider and longer-window GRUs: validation improves, test changes little")
+    ax.grid(axis="y", visible=False)
+    ax.legend(loc="upper right")
+    fs.save(fig, OUT / "tuning_fd001.png")
+
+
 def architecture():
     fs.pipeline(OUT / "architecture.png", [
         ("data-pipeline", ["validated C-MAPSS loader", "regime-aware normalisation",
@@ -205,6 +231,7 @@ if __name__ == "__main__":
     shift()
     widths()
     architecture()
+    tuning()
     if a.raw and a.bundle:
         trajectories(a.raw, a.bundle)
     print("wrote", sorted(p.name for p in OUT.glob("*.png")))

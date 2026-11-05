@@ -93,6 +93,8 @@ def _summarise(name, collector, sets, alpha, cap, trunc_per_unit, seed) -> dict:
         per = [point_metrics(sets["test_last"].y, r["test_last"]) for r in collector.runs]
         res["single_member"] = {k: {"mean": float(np.mean([p[k] for p in per])),
                                     "std": float(np.std([p[k] for p in per]))} for k in per[0]}
+    if "val" in mean:  # used to choose hyper-parameters without touching the test engines
+        res["val_rmse"] = M.rmse(sets["val"].y, mean["val"])
     res["ensemble"] = point_metrics(sets["test_last"].y, mean["test_last"])
     res["ensemble_test_all"] = point_metrics(sets["test_all"].y, mean["test_all"])
 
@@ -143,7 +145,8 @@ def run_subset(raw_dir, subset, archs, classical, seeds, cfg: TrainConfig, alpha
                      "n_train_engines": int(len(tr_u)), "n_val_engines": int(len(va_u)),
                      "n_cal_engines": int(len(ca_u)),
                      "n_test_engines": int(len(prep.test_last)), "models": {}}
-    ev = {"cal": sets["cal"].X, "test_last": sets["test_last"].X, "test_all": sets["test_all"].X}
+    ev = {"cal": sets["cal"].X, "test_last": sets["test_last"].X, "test_all": sets["test_all"].X,
+          "val": sets["val"].X}
 
     for name in classical:
         col = _Collector()
